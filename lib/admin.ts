@@ -5,14 +5,14 @@ import { createUser } from './users'
  * Nützlich für Migration von data/users.ts zu Supabase
  */
 export async function importUsers(
-  users: Array<{ slug: string; username: string; targetName: string }>
+  users: Array<{ slug: string; username: string }>
 ): Promise<{ success: number; failed: number }> {
   let success = 0
   let failed = 0
 
   for (const user of users) {
     try {
-      const result = await createUser(user.slug, user.username, user.targetName)
+      const result = await createUser(user.slug, user.username)
       if (result) {
         success++
         console.log(`✓ User ${user.username} (${user.slug}) hinzugefügt`)
